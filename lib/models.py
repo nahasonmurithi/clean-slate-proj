@@ -2,11 +2,15 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine, desc
 from sqlalchemy import (CheckConstraint, UniqueConstraint,
     Column, DateTime, Integer, String, ForeignKey)
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import relationship, backref, sessionmaker
+
 
 engine = create_engine('sqlite:///clean_slate.db')
 
 Base = declarative_base()
+
+Session = sessionmaker(bind=engine)
+session = Session()
 
 #models
 #class Cleaner(Base):
@@ -51,7 +55,7 @@ class Client(Base):
 
 
 class CleaningTask(Base):
-    
+
     __tablename__ = 'cleaning_tasks'
 
     task_id = Column(Integer(), primary_key=True)
@@ -84,7 +88,7 @@ class ClientTask(Base):
             f'task_id={self.task_id})'
 
 
+engine = create_engine('sqlite:///clean_slate.db')
+Session = sessionmaker(bind=engine)
+session = Session()
 
-
-#create debug.py
-#create seed.py =>loadinng 
